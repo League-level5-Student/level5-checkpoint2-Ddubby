@@ -29,9 +29,60 @@ public class Checkpoint {
 		 * 
 		 * 5. Print only the cars with "toyota" in the name.
 		 */
+		ArrayList<CarMPGEntry> list = readCarMPGEntryDataFromFile();
+		Stream<CarMPGEntry> mpg = list.stream();
+		
+		System.out.println("#1:");
+		mpg.forEach((i)->{
+			System.out.println(i.mpg + " " + i.cylinders + " " + i.displacement + " " + i.horsePower + " " + i.weight + " " + i.acceleration + " " + i.modelYear + " " + i.origin + " " + i.carName);
+		});
+		
+		mpg.close();
+		mpg = list.stream();
+		
+		System.out.println("#2:");
+		mpg.forEach((i)->{
+			System.out.println(i.mpg);
+		});
+		
+		mpg.close();
+		mpg = list.stream();
 		
 		
+//		System.out.println("#3:");
+//		mpg.forEach((i)->{
+//			System.out.println(i.carName);
+//		});
+		
+		System.out.println("#4:");
+		mpg = mpg.filter((i)->{
+			if (i.cylinders == 8) {
+				return false;
+			} else {
+				return true;
+			}
+		});
+		mpg.forEach((i)->{
+			System.out.println(i.cylinders);
+		});
+		
+		mpg.close();
+		mpg = list.stream();
+		
+		System.out.println("#5:");
+		mpg = mpg.filter((i)->{
+			if (i.carName.contains("toyota")) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		mpg.forEach((i)->{
+			System.out.println(i.carName);
+		});
 	}
+	
+	
 	
 	public static ArrayList<CarMPGEntry> readCarMPGEntryDataFromFile(){
 		ArrayList<CarMPGEntry> carList = new ArrayList<CarMPGEntry>();
